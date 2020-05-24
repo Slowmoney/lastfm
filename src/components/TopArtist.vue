@@ -6,18 +6,12 @@
         v-for="(item, index) in topArtist"
         :key="index"
         min-width="300px"
-        @click="
-          $router.push({
-            name: 'Artist',
-            params: { name: item.name }
-          })
-        "
+        @click="$router.push({ name: 'Artist', params: { name: item.name } })"
       >
         <template>
           <v-card-title primary-title
             >{{ index + 1 }}. {{ item.name }}</v-card-title
           >
-
           <v-card-subtitle>
             <v-icon>mdi-play</v-icon>
             {{ item.playcount }}
@@ -46,15 +40,22 @@ export default {
   created() {},
   methods: {
     infiniteHandle($state) {
-      this.$lastfm.chart.getTopArtist(this.page).then(value => {
-        if (value.data.artists.artist.length) {
-          this.page += 1;
-          this.topArtist.push(...value.data.artists.artist);
-          $state.loaded();
-        } else {
-          $state.complete();
-        }
-      });
+      this.$lastfm.chart
+        .getTopArtist(this.page)
+        .then(value => {
+          console.log(this.$root.$children[0].$data);
+
+          if (value.data.artists.artist.length) {
+            this.page += 1;
+            this.topArtist.push(...value.data.artists.artist);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch(() => {
+          this.$root.$children[0].$data.error = true;
+        });
     }
   }
 };

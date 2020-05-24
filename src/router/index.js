@@ -5,6 +5,8 @@ import ArtistTopAlbums from "@/components/ArtistTopAlbums.vue";
 import TopTracks from "@/components/TopTracks.vue";
 import ArtistTopTracks from "@/components/ArtistTopTracks.vue";
 import ArtistAlbumInfo from "@/components/ArtistAlbumInfo.vue";
+import ArtistInfo from "@/components/ArtistInfo.vue";
+
 import Artist from "@/views/Artist.vue";
 Vue.use(VueRouter);
 
@@ -27,7 +29,7 @@ const routes = [
   {
     path: "/artist/:name",
     name: "Artist",
-    component: Artist,
+    component: /* Artist */ ArtistInfo,
     children: [
       /* { path: "albums", component: ArtistTopAlbums, name: "ArtistTopAlbums" }, */
       /*  { path: "top", component: ArtistTopTracks, name: "ArtistTopTracks" } */

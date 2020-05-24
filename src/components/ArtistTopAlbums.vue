@@ -18,7 +18,6 @@
             height="200px"
             :src="item.image[2]['#text']"
           ></v-img>
-
           <v-col min-width="200px">
             <v-card-title primary-title
               >{{ index + 1 }}. {{ item.name }}</v-card-title
@@ -31,10 +30,10 @@
         </v-row>
       </v-card>
     </v-layout>
+    <!-- <v-skeleton-loader type="list-item"> </v-skeleton-loader> -->
     <infinite-loading @infinite="infiniteHandle"></infinite-loading>
   </v-container>
 </template>
-
 <script>
 import InfiniteLoading from "vue-infinite-loading";
 export default {
@@ -58,6 +57,9 @@ export default {
           } else {
             $state.complete();
           }
+        })
+        .catch(() => {
+          this.$root.$children[0].$data.error = true;
         });
     }
   }

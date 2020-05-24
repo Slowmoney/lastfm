@@ -11,7 +11,6 @@
           <v-card-title primary-title
             >{{ index + 1 }}. {{ item.name }}</v-card-title
           >
-
           <v-card-subtitle>
             <v-icon>mdi-play</v-icon>
             {{ item.playcount }}
@@ -38,6 +37,7 @@ export default {
   },
   methods: {
     infiniteHandle($state) {
+      console.log(this.$root.$children[0].$data);
       console.log(this.$route);
       this.$lastfm.chart
         .getArtistTopTracks(this.page, this.$route.params.name)
@@ -49,6 +49,9 @@ export default {
           } else {
             $state.complete();
           }
+        })
+        .catch(() => {
+          this.$root.$children[0].$data.error = true;
         });
     }
   }

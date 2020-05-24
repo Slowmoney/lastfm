@@ -11,7 +11,6 @@
           <v-card-title primary-title
             >{{ index + 1 }}. {{ item.name }}</v-card-title
           >
-
           <v-card-subtitle>
             <v-icon>mdi-play</v-icon>
             {{ item.playcount }}

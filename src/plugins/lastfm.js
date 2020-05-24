@@ -24,6 +24,10 @@ const lastfm = {
     getAlbumInfo: (page = 1, artist = "", album = "") =>
       axios.get(
         `${BASE_URL}?method=album.getInfo&api_key=${API_KEY}&format=json&page=${page}&artist=${artist}&album=${album}`
+      ),
+    getArtistInfo: (artist = "") =>
+      axios.get(
+        `${BASE_URL}?method=artist.getInfo&api_key=${API_KEY}&format=json&artist=${artist}`
       )
   }
 };

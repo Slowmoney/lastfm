@@ -1,7 +1,9 @@
 <template>
   <!-- App.vue -->
-
   <v-app>
+    <v-snackbar v-model="error" color="error" :top="true">
+      Network error
+    </v-snackbar>
     <v-app-bar app>
       <v-btn
         v-if="this.$router.history.current.fullPath != '/'"
@@ -62,7 +64,8 @@ export default {
 
   data: () => ({
     bottomNav: "Home",
-    baseRoutes: ["Home", "TopTracks", "TopArtist"]
+    baseRoutes: ["Home", "TopTracks", "TopArtist"],
+    error: false
   }),
   watch: {
     bottomNav(e) {
