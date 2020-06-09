@@ -7,7 +7,7 @@ import lastfm from "./plugins/lastfm";
 
 Vue.config.productionTip = false;
 Vue.use(lastfm);
-
+Vue.prototype.$eventBus = new Vue(); // 1способ
 new Vue({
   router,
   store,

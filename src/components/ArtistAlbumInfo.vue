@@ -100,8 +100,10 @@ export default {
         this.album = value.data.album;
       })
       .catch(() => {
-        this.$root.$children[0].$data.error = true;
+        this.$eventBus.$emit("error");
       });
+
+    this.$eventBus.$emit("changeNav", "ArtistAlbumInfo");
   },
   computed: {
     imageHeight() {

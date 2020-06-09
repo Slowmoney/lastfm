@@ -35,17 +35,25 @@ export default {
       topTracks: []
     };
   },
+  beforeCreate() {
+    this.$eventBus.$emit("changeNav", "TopTracks");
+  },
   methods: {
     infiniteHandle($state) {
-      this.$lastfm.chart.getTopTracks(this.page).then(value => {
-        if (value.data.tracks.track.length) {
-          this.page += 1;
-          this.topTracks.push(...value.data.tracks.track);
-          $state.loaded();
-        } else {
-          $state.complete();
-        }
-      });
+      this.$lastfm.chart
+        .getTopTracks(this.page)
+        .then(value => {
+          if (value.data.tracks.track.length) {
+            this.page += 1;
+            this.topTracks.push(...value.data.tracks.track);
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
+        })
+        .catch(err => {
+          this.$eventBus.$emit("error");
+        });
     }
   }
 };

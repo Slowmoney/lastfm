@@ -35,10 +35,11 @@ export default {
       topTracks: []
     };
   },
+  created() {
+    this.$eventBus.$emit("changeNav", "ArtistTopTracks");
+  },
   methods: {
     infiniteHandle($state) {
-      console.log(this.$root.$children[0].$data);
-      console.log(this.$route);
       this.$lastfm.chart
         .getArtistTopTracks(this.page, this.$route.params.name)
         .then(value => {
@@ -51,7 +52,7 @@ export default {
           }
         })
         .catch(() => {
-          this.$root.$children[0].$data.error = true;
+          this.$eventBus.$emit("error");
         });
     }
   }

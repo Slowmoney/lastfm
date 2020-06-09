@@ -37,14 +37,15 @@ export default {
       topArtist: []
     };
   },
-  created() {},
+
+  beforeCreate() {
+    this.$eventBus.$emit("changeNav", "TopArtist");
+  },
   methods: {
     infiniteHandle($state) {
       this.$lastfm.chart
         .getTopArtist(this.page)
         .then(value => {
-          console.log(this.$root.$children[0].$data);
-
           if (value.data.artists.artist.length) {
             this.page += 1;
             this.topArtist.push(...value.data.artists.artist);
@@ -54,7 +55,7 @@ export default {
           }
         })
         .catch(() => {
-          this.$root.$children[0].$data.error = true;
+          this.$eventBus.$emit("error");
         });
     }
   }

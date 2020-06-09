@@ -9,7 +9,6 @@ module.exports = {
   },
   rules: {
 
-    "code": 300,
     "no-const-assign": "warn",
     "no-this-before-super": "warn",
     "no-undef": "warn",
